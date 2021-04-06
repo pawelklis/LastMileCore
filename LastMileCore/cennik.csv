@@ -1,0 +1,54 @@
+﻿Rejon;Przewoznik_KOD;Zadanie;Umowa;StawkaPrzesylkaKurierska;StawkaPrzesylkaPocztowa;Degres;AneksZPO;Wskaznik
+1;PHU MAVI Agnieszka Hryhorczuk;3,78;3,78;3;true;90; Rejon  1;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+FR1;PHU MAVI Agnieszka Hryhorczuk;3,78;3,78;3;true;90; Rejon  1;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+ZA1;PHU MAVI Agnieszka Hryhorczuk;3,78;3,78;3;true;90; Rejon  1;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+2;Poczta Polska;0;0;0;false;0; Rejon  2;zasoby własne;PP_POL
+3;Poczta Polska;0;0;0;false;0; Rejon  3;zasoby własne;PP_POL
+4;umowa-zlecenie;4,07;4,07;3;true;90; Rejon  4;umowa-zlecenie (K. Wnęk);50900KREAT
+5;SPEED TRANS Rafał Nowortya;3,49;3,49;3;true;90; Rejon  5;umowa doraźna w terminie 7-31.01.2019 r.;SPEEDTRANS
+6;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon  6;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+7;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon  7;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+8;PHU MAVI Agnieszka Hryhorczuk;3,78;3,78;3;true;90; Rejon  8;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+FR8;PHU MAVI Agnieszka Hryhorczuk;3,78;3,78;3;true;90; Rejon  8;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+ZA8;PHU MAVI Agnieszka Hryhorczuk;3,78;3,78;3;true;90; Rejon  8;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+9;Poczta Polska;0;0;0;false;0; Rejon  9;zasoby własne;PP_POL
+10;KREATOR Joanna Wnęk;4,3;4,3;3;true;90; Rejon 10;umowa doraźna w terminie 7-31.01.2019 r.;50900KREAT
+11;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 11;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+12;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 12;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+13;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 13;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+14;Poczta Polska;0;0;0;false;0; Rejon 14;zasoby własne;PP_POL
+15;Poczta Polska;0;0;0;false;0; Rejon 15;zasoby własne;PP_POL
+16;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 16;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+17;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 17;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+18;KREATOR Joanna Wnęk;4,44;4,44;3;true;90; Rejon 18;umowa doraźna w terminie 7-31.01.2019 r.;50900KREAT
+19;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 19;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+20;KREATOR Joanna Wnęk;4,3;4,3;3;true;90; Rejon 20;umowa doraźna w terminie 7-31.01.2019 r.;50900KREAT
+21;Poczta Polska;0;0;0;false;0; Rejon 21;zasoby własne;PP_POL
+22;PHU MAVI Agnieszka Hryhorczuk;4,17;4,17;3;true;90; Rejon 22;umowa doraźna w terminie 7-31.01.2019 r.;50900MAVI
+23;KREATOR Joanna Wnęk;4,44;4,44;3;true;90; Rejon 23;umowa doraźna w terminie 7-31.01.2019 r.;50900KREAT
+24;SPEED TRANS Rafał Nowortya;3,29;3,29;3;true;90; Rejon 24;umowa doraźna w terminie 7-31.01.2019 r.;SPEEDTRANS
+25;umowa-zlecenie;4,07;4,07;3;true;90; Rejon 25;umowa-zlecenie (K. Wnęk);50900KREAT
+26;SPEED TRANS Rafał Nowortya;3,39;3,39;3;true;90; Rejon 26;umowa doraźna w terminie 7-31.01.2019 r.;SPEEDTRANS
+27;PHU MAVI Agnieszka Hryhorczuk;10;10;3;true;90; Rejon 27 (gabaryty PP);brak umowy / zlecenie transportowe;50900MAVI
+28;PHU MAVI Agnieszka Hryhorczuk;10;10;3;true;90; Rejon 28 (gabaryty MAVI);brak umowy / zlecenie transportowe;50900MAVI
+29;PHU MAVI Agnieszka Hryhorczuk;10;10;3;true;90; Rejon 29 (gabaryty KREATOR);brak umowy / zlecenie transportowe;50900MAVI
+P53;Poczta Polska;0;0;0;false;0; Rejon 53;zasoby własne;PP_POL
+MM1;PK-TRANS;5,5;5,5;3;true;90; Rejon Mirków;umowa doraźna w terminie 7-31.01.2019 r.;50900PK
+MM2;PK-TRANS;5,5;5,5;3;true;90; Rejon Mirków;umowa doraźna w terminie 7-31.01.2019 r.;50900PK
+SW1;PK-TRANS;5,5;5,5;3;true;90; Rejon Św.Katarzyna  ;umowa doraźna w terminie 7-31.01.2019 r.;50900PK
+SW2;PK-TRANS;5,5;5,5;3;true;90; Rejon Św.Katarzyna  ;umowa doraźna w terminie 7-31.01.2019 r.;50900PK
+SW3;PK-TRANS;5,5;5,5;3;true;90; Rejon Św.Katarzyna  ;umowa doraźna w terminie 7-31.01.2019 r.;50900PK
+7SENDERS;Poczta Polska;0;0;0;false;0;OWiK Wrocław;zasoby własne;PP_POL
+DD;Poczta Polska;0;0;0;false;0;Wydane w WER Wrocław;zasoby własne;PP_POL
+M7;Poczta Polska;0;0;0;false;0;Ferratum Bank;zasoby własne;PP_POL
+OR;Poczta Polska;0;0;0;false;0;ORLEN;zasoby własne;PP_POL
+RU;Poczta Polska;0;0;0;false;0;RUCH;zasoby własne;PP_POL
+PH;Poczta Polska;0;0;0;false;0;RDFIH WROCŁAW MAGAZYN HANDLOWY;zasoby własne;PP_POL
+50;Poczta Polska;0;0;0;false;0;CCC;zasoby własne;PP_POL
+54;Poczta Polska;0;0;0;false;0;NEO24.PL;zasoby własne;PP_POL
+B;Poczta Polska;0;0;0;false;0;BOŚ;zasoby własne;PP_POL
+C;Poczta Polska;0;0;0;false;0;CYCLEON;zasoby własne;PP_POL
+G;Poczta Polska;0;0;0;false;0;Gracja, Loombard i mpTECH;zasoby własne;PP_POL
+J;Poczta Polska;0;0;0;false;0;mpTECH;zasoby własne;PP_POL
+REJORDIP;Poczta Polska;0;0;0;false;0;ORDIPOL;zasoby własne;PP_POL
+AMAZON;Poczta Polska;0;0;0;false;0;AMAZON;zasoby własne;PP_POL

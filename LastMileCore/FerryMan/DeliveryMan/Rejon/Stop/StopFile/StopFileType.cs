@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordRecognizerCore;
+using System.Reflection;
 
 namespace LastMileCore
 {
-    class StopFileType
+    [DebuggerDisplay("{NR_PRZ} {NR_REJONU} {NAZWA_ADRES} {PNA_DORECZ} {MIEJSC_DORECZ} {ULICA_DORECZ} {NR_DOM_DORECZ}")]
+    public class StopFileType
     {
         public string PNI_AWIZO { get; set; }
         public string JEDNOSTKA_DOR { get; set; }
@@ -35,52 +39,54 @@ namespace LastMileCore
         public string WAGA { get; set; }
         public string NSTD { get; set; }
         public string NAZWA_JD { get; set; }
-        public string NR_KADROWY { get; set; }
+        public string DOR_KOD { get; set; }
         public string PRZEWOZNIK_KOD { get; set; }
 
         public string NormalizeMiejsc { get; set; }
         public string NormalizeUlica { get; set; }
         public string NormalizeNrBud { get; set; }
 
-        public string PARCEL_GROUP { get; set; }
+        public List<PArcelGroupSumType> PARCEL_GROUP { get; set; }
+              
         public string STOP_CODE { get; set; }
         public bool Is_Delivered { get; set; }
+             
+        public bool NormalizedAdress { get; set; }
 
-        public string PercentegCity { get; set; }
-        public string PercentegeStreet { get; set; }
+        public StawkaTyp TypStawki { get; set; }
+        public double STAWKA { get; set; }
 
-        public string NormalizeAdres()
+        public static event EventHandler OnNeedNormalizeInformation;
+       
+        public bool NormalizeAdres(WordRecognizerType Recognizer)
         {
-            string returning = "";
-
+          
             string city = MIEJSC_DORECZ;
             string street = ULICA_DORECZ;
             string dom = NR_DOM_DORECZ;
 
-            street = street.Replace("UL.", "").Replace("UL. ", "").Replace("UL ", "").Replace("UL.  ","");
 
-            city = city.Replace("  ", " ");
-            street = street.Replace("  ", "");
+            List<RecognitionResulType> result = Recognizer.Match(city, street, PNA_DORECZ);
+            if(result.Count > 0)
+            {
+            var r = result[0];
 
-
-
-
-            PercentFraseRecognizerType Recognizer = new PercentFraseRecognizerType();
-            Recognizer.Cities = DicterType.Cities();
-       //     Recognizer.Streets = DicterType.Streets();
-
-            PercentegCity = Recognizer.MatchWord(city, PercentFraseRecognizerType.AdresPartType.City);
-            PercentegeStreet = Recognizer.MatchWord(street, PercentFraseRecognizerType.AdresPartType.Street);
-
-             city = ZnakiPL(city);
-             street = ZnakiPL(street);
-             dom = ZnakiPL(dom);
-
-            NormalizeMiejsc = city;
-            NormalizeUlica = street;
+            NormalizeMiejsc = r.ResultDict.City;
+            NormalizeUlica = r.ResultDict.Street;
             NormalizeNrBud = dom;
 
-            return returning;
+                return true;
+            }
+            else
+            {
+                EventHandler temp = OnNeedNormalizeInformation;
+                if (temp != null)
+                    temp(this, new EventArgs());
+                OnNeedNormalizeInformation(this,  new EventArgs());
+                return true;
+            }
+
+            return false;
         }
 
         public string GenereteSTOPCode()
@@ -95,49 +101,89 @@ namespace LastMileCore
             return StopCode;
         }
 
-        public string GetParcelGroup()
+
+        public void GetParcelGroup()
         {
-            string parcelgroup = "";
+
             List<ParcelGroupType> l = DicterType.ParcelGroups();
+            PARCEL_GROUP = new List<PArcelGroupSumType> ();
 
-            foreach (var o in l)
+            foreach (var od in l)
             {
-                if (o.ParcelCode == TYP_PRZ)
+                PArcelGroupSumType o = new PArcelGroupSumType();
+                o.Name = od.ParcelGroupName;
+
+                foreach(var prop in typeof(StopFileType).GetProperties())
                 {
-                    parcelgroup = o.ParcelGroupName;
+                    if (prop.Name == od.Column)
+                    {
+                        foreach(var pv in od.Parcelcodes())
+                        {
+                            string val = prop.GetValue(this).ToString();
+                            if (pv == val)
+                            {
+                                o.IsTrue = 1;
+                                if (od.TypStawki != StawkaTyp.BRAK)
+                                {
+                                    TypStawki = od.TypStawki;
+                                }
+
+
+                                if (Is_Delivered == true)
+                                {
+                                    o.isTrueDeliveredOnly = 1;                                    
+                                }
+                            }
+                        }
+                    }
                 }
-            }
 
-            PARCEL_GROUP = parcelgroup;
-
-            return parcelgroup;
+                PARCEL_GROUP.Add(o);
+            }        
+                        
         }
 
         public bool IsDelivered()
         {
             bool returning = false;
-            if (STATUS_PRZE_W_KO == "D")
+            List<string> L = DicterType.DeliveredCodes();
+
+
+            foreach(var code in L)
             {
-                returning = true;
-            }
-            if (STATUS_PRZE_W_KO == "DP")
-            {
-                returning = true;
-            }
-            if (STATUS_PRZE_W_KO == "S")
-            {
-                returning = true;
+                if (STATUS_PRZE_W_KO == code)
+                {
+                    returning = true;
+                }
             }
 
             Is_Delivered = returning;
             return returning;
         }
 
-
+        public void SetStawka(List<CennikType> L)
+        {
+            foreach(CennikType c in L)
+            {
+                if (c.Rejon == NR_REJONU)
+                {
+                    if (c.Przewoznik_KOD == PRZEWOZNIK_KOD)
+                    {
+                        if (TypStawki == StawkaTyp.StawkaPrzesylkaKurierska)
+                        {
+                            STAWKA = c.StawkaPrzesylkaKurierska;
+                        }
+                        if (TypStawki ==  StawkaTyp.StawkaPrzesylkaPocztowa )
+                        {
+                            STAWKA = c.StawkaPrzesylkaKurierska;
+                        }
+                    }
+                }
+            }
+        }
         private string ZnakiPL(string TextZrodlowy)
         {
-                    string TextDocelowy = TextZrodlowy;
-        
+            string TextDocelowy = TextZrodlowy;       
 
             TextDocelowy = TextDocelowy.ToLower().Replace("ą", "a");
             TextDocelowy = TextDocelowy.ToLower().Replace("ć", "c");

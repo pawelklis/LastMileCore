@@ -1,47 +1,63 @@
-﻿using NHunspell;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordRecognizerCore;
 
 namespace LastMileCore
 {
     class Program
     {
+        static WordRecognizerType Recognizer;
+        static void OnNeedNormalizeInfo(object sender, EventArgs e)
+        {                    
+            //Pytania o uzupełnienie adresu
+
+            //string csb;
+            //AliasType a = new AliasType();
+            //StopFileType  o = (StopFileType)sender;
+
+            //if (!string.IsNullOrEmpty(o.MIEJSC_DORECZ))
+            //{
+            //    if (!string.IsNullOrEmpty(o.ULICA_DORECZ))
+            //    {
+
+
+
+            //        Console.WriteLine(o.MIEJSC_DORECZ);
+            //        csb = Console.ReadLine();
+            //        a.City = csb;
+
+            //        Console.WriteLine(o.ULICA_DORECZ);
+            //        csb = Console.ReadLine();
+            //        a.Street = csb;
+
+            //        a.PNA = o.PNA_DORECZ;
+
+            //        a.Alias = o.MIEJSC_DORECZ + o.ULICA_DORECZ + o.PNA_DORECZ;
+
+            //        Recognizer.AddAlias(a, o.MIEJSC_DORECZ, o.ULICA_DORECZ, o.PNA_DORECZ);
+
+            //        o.NormalizeAdres(Recognizer);
+            //    }
+            //}
+           
+        }
         static void Main(string[] args)
         {
+            Recognizer = new WordRecognizerType();
+            Recognizer.Load("wrdDict.csv", "wrdaliases.csv");
 
-            NHunspell.Hunspell nh = new NHunspell.Hunspell();
-            nh.Load("index.aff", "index.dic");
-            var ox=nh.Generate("Kąty wrocławskie", "katy wroclawskie");
-            nh.AddWithAffix("Kąty wrocławskie", "katy wroclawskie");
+            ReadFilerType.OnNeedNormalizeInformation += OnNeedNormalizeInfo;
 
-            var xx=nh.Spell(" katy wroclawskie");
-            var sx = nh.Suggest("dlugoleka");
-            List<string> lh = nh.Analyze("wroclaw");
-            var aasx=nh.Stem("wroclaw");
-
-        
-
-
-
-            using (Hyphen hyphen = new Hyphen("index.dic"))
-            {
-                Console.WriteLine("Get the hyphenation of the word 'Recommendation'");
-                HyphenResult hyphenated = hyphen.Hyphenate("GAŁ=CZYNSKIEGOP");
-                Console.WriteLine("'Recommendation' is hyphenated as: " +
-                                  hyphenated.HyphenatedWord);
-            }
-
-       
-
-       
-
-
-            List<StopFileType> l = ReadFilerType.ImportSTOPFile(@"C:\Users\klispawel\Downloads\RD Wrocław2.xlsx");
+            List<StopFileType> l = ReadFilerType.ImportSTOPFile(@"C:\Users\klispawel\Downloads\RD Wrocław2.xlsx", Recognizer ,false);
             string x = "";
+
+
+
+            var distnomatch = Recognizer.NoMatched.Distinct().ToList();
 
             Console.Clear();
             foreach(var o in l)
@@ -52,15 +68,13 @@ namespace LastMileCore
                     o.NR_DOM_DORECZ + "^" +
                     o.NormalizeMiejsc + "^" +
                     o.NormalizeUlica + "^" +
-                    o.NormalizeNrBud + "^" +
-                    o.PercentegCity + "^" +
-                    o.PercentegeStreet;
+                    o.NormalizeNrBud + "^";
+
                 if (!string.IsNullOrEmpty(o.MIEJSC_DORECZ ))
                 {
                 linia = linia.Replace(" ","|");
                 Console.WriteLine(linia);
                 }
-
             }
 
 
@@ -74,20 +88,7 @@ namespace LastMileCore
             }
 
 
-            Console.Clear();
-            foreach (var f in L)
-            {
-                foreach (var d in f.DeliveryMans)
-                {
-                    foreach (var s in d.STOPS)
-                    {
-                        if (s.ParcelList.Count > 1)
-                        {
-                            Console.WriteLine(s.STOPCode + "^" + s.ParcelList.Count + "^" + s.ParcelList[0].MIEJSC_DORECZ + "^" + s.ParcelList[0].ULICA_DORECZ + "^" + s.ParcelList[0].NR_DOM_DORECZ + "^" + s.ParcelList[0].PNA_DORECZ );
-                        }
-                    }
-                }
-            }
+ 
 
         }
     }

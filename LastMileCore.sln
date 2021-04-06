@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LastMileCore", "LastMileCore\LastMileCore.csproj", "{AF834298-46D5-4AE5-9A7F-8E652D8C7A46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordRecognizerCore", "WordRecognizerCore\WordRecognizerCore.csproj", "{BEFA4DFA-1428-457C-B264-C2CAC4C4FECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMForms", "LMForms\LMForms.csproj", "{F84DFC40-BB84-4F8B-9C79-A40D0BF728E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{AF834298-46D5-4AE5-9A7F-8E652D8C7A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF834298-46D5-4AE5-9A7F-8E652D8C7A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF834298-46D5-4AE5-9A7F-8E652D8C7A46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEFA4DFA-1428-457C-B264-C2CAC4C4FECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFA4DFA-1428-457C-B264-C2CAC4C4FECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFA4DFA-1428-457C-B264-C2CAC4C4FECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFA4DFA-1428-457C-B264-C2CAC4C4FECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F84DFC40-BB84-4F8B-9C79-A40D0BF728E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F84DFC40-BB84-4F8B-9C79-A40D0BF728E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F84DFC40-BB84-4F8B-9C79-A40D0BF728E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F84DFC40-BB84-4F8B-9C79-A40D0BF728E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

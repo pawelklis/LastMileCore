@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace LastMileCore
 {
-    class DistCity
+    public class DistCity
     {
         public string City { get; set; }
+        public List<string> PNAs { get; set; }
 
         public string CityPL()
         {

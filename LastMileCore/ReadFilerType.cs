@@ -9,17 +9,26 @@ using System.Threading.Tasks;
 
 namespace LastMileCore
 {
-    class ReadFilerType
+    public class ReadFilerType
     {
-        public static List<StopFileType> ImportSTOPFile(string XLSXFilename)
+
+        public static event EventHandler OnNeedNormalizeInformation;
+
+        public static List<StopFileType> ImportSTOPFile(string XLSXFilename, WordRecognizerCore.WordRecognizerType Recognizer,bool NormalizeAdres)
         {
             DataTable dt = ExcelToDataTable(XLSXFilename);
-            List<StopFileType> L = CreateList(dt);
+            List<StopFileType> L = CreateList(dt,Recognizer,NormalizeAdres );
             return L;
         }
         private static DataTable  ExcelToDataTable(string XLSXFilename)
         {
-            string CSVPAth = XLSXtoCSV("^", XLSXFilename);
+            string CSVPAth = XLSXFilename ;
+            if(Path.GetExtension(XLSXFilename) == ".xlsx")
+            {
+                CSVPAth = XLSXtoCSV("^", XLSXFilename);
+            }
+
+
             DataTable dt = csvToDatatable(CSVPAth, "^");
             try
             {
@@ -33,10 +42,11 @@ namespace LastMileCore
             return dt;
         }
 
-        private static List<StopFileType> CreateList(DataTable dt)
+        private static List<StopFileType> CreateList(DataTable dt, WordRecognizerCore.WordRecognizerType Recognizer, bool NormalizeAdres)
         {
+            StopFileType.OnNeedNormalizeInformation += new EventHandler(OnNeedNormalizeInfo);
             List<StopFileType> L = new List<StopFileType>();
-            Console.Clear();
+            //Console.Clear();
             for (var i = 0; i <= dt.Rows.Count-1 ; i++)
             {
                 StopFileType o = new StopFileType();
@@ -51,19 +61,25 @@ namespace LastMileCore
                     }
                 }
                 o.GenereteSTOPCode();
-                o.GetParcelGroup();
                 o.IsDelivered();
-                o.NormalizeAdres();
+                o.GetParcelGroup();
 
-                Console.SetCursorPosition(0, 0);
-                Console.Write("                                                                                                                                        ");
-                Console.SetCursorPosition(0, 0); ;
-                Console.Write(L.Count +" " + o.PercentegCity + " " + o.PercentegeStreet );
+                if (NormalizeAdres == true)
+                {
+                    o.NormalizedAdress  = o.NormalizeAdres(Recognizer);
+                }
+                              
+             
 
                 L.Add(o);
             }
 
             return L;
+        }
+
+        static void OnNeedNormalizeInfo(object sender, EventArgs e)
+        {
+            OnNeedNormalizeInformation(sender, new EventArgs());
         }
 
         private static string XLSXtoCSV(string separator, string FileName)

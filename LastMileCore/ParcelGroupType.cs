@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace LastMileCore
 {
-    class ParcelGroupType
+    public class ParcelGroupType
     {
 
         public string ParcelCode { get; set; }
         public string ParcelGroupName { get; set; }
+        public string Column { get; set; }
+        public StawkaTyp TypStawki { get; set; }
+
+
+
+       public List<string> Parcelcodes()
+        {
+            return ParcelCode.Split(',').ToList();
+        }
 
     }
 }

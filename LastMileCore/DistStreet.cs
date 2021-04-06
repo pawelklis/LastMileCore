@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LastMileCore
 {
-    class DistStreet
+    public class DistStreet
     {
         public DistCity  City { get; set; }
         public string Street { get; set; }
